@@ -1,0 +1,27 @@
+<!-- index shows the homepage of the website -->
+{% extends "base.html" %}
+{% block title %}WAIFU SELLING SITE{% endblock %}
+{% block content %}
+<div class="container" align=center>
+<!-- This is the place to put all the content -->
+	{%for c in characters %}
+	{%if forloop.first %}
+	<table>
+		<tr bgcolor='#2c3e50'>
+			<td width=300>ORIGIN</td>
+			<td width=250>WAIFU NAME</td>
+			<td width=100>PRICE</td>
+	{% endif %}
+		<tr bgcolor='{% cycle "#2980b9" "#8e44ad"%}'>
+			<td>{{c.origin}}</td>
+			<td><a href='{% url "detail-url" c.id %}'>{{c.name}}</a></td>
+			<td>{{c.price}}</td>
+		</tr>
+	{%if forloop.last%}
+	</table>
+	{% endif %}
+	{% empty %}
+	<h3>No WAIFU is ready for sale yet, Comeback later!</h3>
+	{% endfor %}
+</div>
+{% endblock %}

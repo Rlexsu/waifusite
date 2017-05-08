@@ -1,0 +1,27 @@
+<!-- detail.html is used to show waifu's detail-->
+{% extends "base.html" %}
+{% block title %}{{character.name | default:"Unknown character"}}{% endblock %}
+{% block content %}
+<div class='container' align=center>
+{% if character %}
+<table>
+	<tr><td align=center><h3>{{ character.name }}</h3></td></tr>
+	<tr><td align=center>{{ character.description }}</td></tr>
+	<tr><td align=center>Selling Price: {{ character.price }} Alice coins </td></tr>
+	{% for image in images %}
+		{% if forloop.first %}
+			<tr><td align=center>
+		{% endif %}
+			<img src=' {{ image.url }}' width=350><br>
+		{% if forloop.last %}
+			</td></tr>
+		{% endif %}
+	{% empty %}
+		<tr><td align=center>No image available yet.</td></tr>
+	{% endfor %}
+</table>
+{% else %}
+<h2>Couldn't locate this character in the database.</h2>
+{% endif %}
+</div>
+{% endblock %}
